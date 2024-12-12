@@ -7,8 +7,13 @@ export default async function () {
 }
 
 export function createProgram() {
-  program.name('brainbuild').description('CLI to rapidly create web apps')
-
+  program
+    .name('brainbuild')
+    .description('CLI to rapidly create web apps.')
+    .addHelpText(
+      'after',
+      "\nIf you haven't configured Brainbuild yet, run 'brainbuild init' to get started."
+    )
   program.addCommand(getInitCommand())
 
   return program

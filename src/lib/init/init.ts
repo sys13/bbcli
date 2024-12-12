@@ -31,39 +31,22 @@ export function getInitCommand() {
   return init
 }
 
-export async function handleInit(
-  options: {
-    readonly name?: string
-    readonly debug?: boolean
-    readonly installPackages?: boolean
-  },
-  doNothing = false,
-  installPackages: boolean
-) {
-  let appName = ''
-
-  if (options.name) {
-    appName = options.name
-  } else {
-    console.log('You are about to initialize a webapp with bildengine 🚀')
-
-    appName = await input({
-      required: true,
-      message: 'What do you want to name your app?',
-      default: 'Prototype App',
-    })
-  }
-
+export async function handleInit(options: { readonly debug?: boolean }) {
   const { targetDir } = getDirs()
 
-  await createConfigFiles({ targetDir, appName })
-  // await createApp({
-  //   appName,
-  //   currentDir: process.env.INIT_CWD ?? process.cwd(),
-  //   targetDir,
-  //   doNothing,
-  //   installPackages: options.installPackages ?? installPackages ?? true,
-  // });
+  const secret = await input({
+    message: 'Enter your secret key',
+    required: true,
+  })
+  const projectId = await input({
+    message: 'Enter your project id',
+    required: true,
+  })
+
+  await createConfigFiles({ targetDir, secret, projectId })
+  console.log('-------\n')
+  console.log(`🚀 Your new project has been initialized!\n`)
+  console.log('-------\n')
 }
 
 async function createApp({
@@ -86,40 +69,14 @@ async function createApp({
   }
   console.log('Copying template files...')
 
-  fse.copySync(templateDir, targetDir, {
-    overwrite: false,
-    errorOnExist: true,
-  })
+  // fse.copySync(templateDir, targetDir, {
+  //   overwrite: false,
+  //   errorOnExist: true,
+  // })
 
-  console.log('-------\n')
-  console.log(`🚀 Your new project has been initialized!\n`)
-  console.log('-------\n')
-
-  console.log('📋 ' + chalk.underline('Next Steps'))
-
-  console.log(chalk('\n1. Navigate to your project folder:'))
-  console.log(chalkTheme.code(`cd ${path.relative(currentDir, targetDir)}`))
-
-  console.log(
-    `\n2. Customize config files in the ${chalk.bold(
-      'bildengine'
-    )} folder (add models, pages, etc.)`
-  )
-
-  console.log(chalk(`\n3. Run your project locally`))
   console.log(chalkTheme.code(`npm run dev`))
 
-  await createConfigFiles({ targetDir, appName })
   return null
-}
-
-async function remixInit() {
-  console.log('Calling remix init...')
-  const { stderr } = await exec('npx remix init')
-  if (!stderr) {
-    console.log('✅ Remix init successful')
-  }
-  return stderr
 }
 
 function getDirs() {
