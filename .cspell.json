@@ -1,5 +1,5 @@
 {
-  "version": "0.1",
+  "version": "0.2",
   "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/master/cspell.schema.json",
   "language": "en",
   "words": [
@@ -7,6 +7,7 @@
     "bildengine",
     "bitauth",
     "bitjson",
+    "brainbuild",
     "cimg",
     "circleci",
     "codecov",
@@ -45,6 +46,7 @@
     "package-lock.json",
     "yarn.lock",
     "tsconfig.json",
-    "node_modules/**"
+    "node_modules/**",
+    ".brainbuild"
   ]
 }

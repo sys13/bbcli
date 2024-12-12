@@ -11,3 +11,4 @@ tsconfig.module.tsbuildinfo
 init-app
 init-app.tar.gz
 prototype-app
+.brainbuild
