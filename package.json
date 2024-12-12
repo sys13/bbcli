@@ -1,0 +1,81 @@
+{
+  "name": "brainbuild",
+  "version": "1.0.0",
+  "description": "create apps fast",
+  "repository": "https://github.com/sys13/bbcli",
+  "license": "MIT",
+  "keywords": [],
+  "type": "module",
+  "typings": "build/main/index.d.ts",
+  "bin": {
+    "brainbuild": "bin/brainbuild.mjs"
+  },
+  "scripts": {
+    "start": "node build/main/index.js",
+    "build": "run-p build:*",
+    "build:main": "tsc -p tsconfig.json",
+    "fix": "run-s fix:*",
+    "fix:prettier": "prettier \"src/**/*.ts\" --write",
+    "check-cli": "run-s test diff-integration-tests check-integration-tests",
+    "format": "prettier --write .",
+    "watch:build": "tsc -p tsconfig.json -w",
+    "version": "standard-version",
+    "reset-hard": "git clean -dfx && git reset --hard && npm i",
+    "prepare-release": "run-s reset-hard version",
+    "typecheck": "tsc -b"
+  },
+  "engines": {
+    "node": ">=14.16"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "fs-extra": "^11.2.0",
+    "g": "^2.0.1",
+    "inquirer": "^12.2.0",
+    "lodash": "^4.17.21",
+    "standard-version": "^9.5.0",
+    "ts-toolbelt": "^9.6.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/inquirer": "^9.0.7",
+    "@types/tar": "^6.1.13",
+    "bcryptjs": "^2.4.3",
+    "cspell": "^8.16.1",
+    "cz-conventional-changelog": "^3.3.0",
+    "jest": "^29.7.0",
+    "lodash": "^4.17.21",
+    "open-cli": "^8.0.0",
+    "tiny-invariant": "^1.3.3",
+    "typedoc": "^0.27.4",
+    "zod": "^3.24.1",
+    "@faker-js/faker": "^9.3.0",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/lodash": "^4.17.13",
+    "@types/node": "^22.10.2",
+    "binode": "^1.0.5",
+    "cross-env": "^7.0.3",
+    "npm-run-all": "^4.1.5",
+    "prettier": "3.4.2",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.7.2"
+  },
+  "files": [
+    "bin",
+    "build/main",
+    "!**/*.spec.*",
+    "!**/*.json",
+    "template",
+    "CHANGELOG.md",
+    "LICENSE",
+    "README.md"
+  ],
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  }
+}
