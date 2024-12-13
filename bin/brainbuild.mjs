@@ -1,2 +1,2 @@
-#! /usr/bin/env node
+#!/usr/bin/env node
 import('../build/main/index.js')

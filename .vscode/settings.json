@@ -4,6 +4,12 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "eslint.useFlatConfig": true,
-  "eslint.format.enable": true,
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.ts": "explicit",
+    "source.organizeImports": "explicit",
+    "source.fixAll": "explicit",
+    "source.removeUnusedImports": "explicit"
+  }
 }

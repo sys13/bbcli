@@ -1,5 +1,5 @@
-import { Command } from 'commander'
 import { input } from '@inquirer/prompts'
+import { Command } from 'commander'
 import { debugOption } from '../commonOptions.js'
 import createConfigFiles from './createConfigFiles.js'
 

@@ -1,3 +1,3 @@
 import main from './lib/main.js'
 
-main()
+await main()

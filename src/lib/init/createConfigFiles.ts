@@ -1,5 +1,5 @@
-import path from 'node:path'
 import fse from 'fs-extra'
+import path from 'node:path'
 
 export default async function ({
   targetDir,
@@ -16,7 +16,7 @@ export default async function ({
 }
 `
 
-  fse.writeFileSync(path.join(targetDir, '.brainbuild'), mainFile)
+  await fse.writeFile(path.join(targetDir, '.brainbuild'), mainFile)
 
   // todo: add to .gitignore
   try {
@@ -32,6 +32,7 @@ export default async function ({
       gitignoreContent += '\n.brainbuild\n'
       fse.writeFileSync(gitignorePath, gitignoreContent)
     }
+    // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
   } catch (_error) {
     console.error('Error writing to .gitignore')
   }
