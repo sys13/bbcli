@@ -32,5 +32,7 @@ export default async function ({
       gitignoreContent += '\n.brainbuild\n'
       fse.writeFileSync(gitignorePath, gitignoreContent)
     }
-  } catch (error) {}
+  } catch (_error) {
+    console.error('Error writing to .gitignore')
+  }
 }

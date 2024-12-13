@@ -36,6 +36,7 @@
     "sandboxed",
     "tarballname",
     "transpiled",
+    "tseslint",
     "typedoc",
     "untracked",
     "webapps"
