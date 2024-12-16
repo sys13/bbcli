@@ -19,6 +19,12 @@ const RESPONSE_SCHEMA = z.object({
       route: z.string(),
     })
   ),
+  standardFiles: z.array(
+    z.object({
+      content: z.string(),
+      name: z.string(),
+    })
+  ),
 })
 
 export function getSyncCommand() {
@@ -79,6 +85,30 @@ export async function handleSync() {
   if (!parsedResponse.success) {
     console.error('Invalid response from server:', parsedResponse.error)
     return
+  }
+  const { pages, standardFiles } = parsedResponse.data
+
+  // todo: for each page, create a file in the target directory /app/${route}/page.tsx
+  for (const page of pages) {
+    const pageDir = path.join(targetDir, 'app', page.route)
+    if (!fs.existsSync(pageDir)) {
+      fs.mkdirSync(pageDir, { recursive: true })
+    }
+    const filePath = path.join(pageDir, 'page.tsx')
+    // todo: check if the file already exists and prompt the user to overwrite
+
+    fs.writeFileSync(filePath, page.fileText)
+  }
+
+  for (const page of standardFiles) {
+    const pageDir = path.join(targetDir, 'components')
+    if (!fs.existsSync(pageDir)) {
+      fs.mkdirSync(pageDir, { recursive: true })
+    }
+    const filePath = path.join(pageDir, page.name)
+    // todo: check if the file already exists and prompt the user to overwrite
+
+    fs.writeFileSync(filePath, page.content)
   }
 
   console.log('Fetched code files:', responseData)
