@@ -4,8 +4,8 @@ import path from 'path'
 import { z } from 'zod'
 import { debugOption } from '../commonOptions.js'
 
-// const URL = 'https://www.brainbuildai.com'
-const BASE_URL = 'http://localhost:3000'
+const BASE_URL = 'https://www.brainbuildai.com'
+// const BASE_URL = 'http://localhost:3000'
 
 const BB_CONFIG_SCHEMA = z.object({
   projectId: z.string(),
@@ -39,13 +39,6 @@ export function getSyncCommand() {
 
   return command
 }
-
-// interface PagesResponse {
-// 	pages: {
-// 		fileText: string
-// 		route: string
-// 	}[]
-// }
 
 export async function handleSync() {
   const { targetDir } = getDirs()
@@ -88,7 +81,6 @@ export async function handleSync() {
   }
   const { pages, standardFiles } = parsedResponse.data
 
-  // todo: for each page, create a file in the target directory /app/${route}/page.tsx
   for (const page of pages) {
     const pageDir = path.join(targetDir, 'app', page.route)
     if (!fs.existsSync(pageDir)) {
@@ -106,12 +98,9 @@ export async function handleSync() {
       fs.mkdirSync(pageDir, { recursive: true })
     }
     const filePath = path.join(pageDir, page.name)
-    // todo: check if the file already exists and prompt the user to overwrite
 
     fs.writeFileSync(filePath, page.content)
   }
-
-  console.log('Fetched code files:', responseData)
 }
 
 function getDirs() {
@@ -119,10 +108,3 @@ function getDirs() {
 
   return { targetDir }
 }
-
-// fse.copySync(templateDir, targetDir, {
-//   overwrite: false,
-//   errorOnExist: true,
-// })
-
-// console.log(chalkTheme.code(`npm run dev`))
