@@ -42,7 +42,8 @@ export function getSyncCommand() {
 
 export async function handleSync() {
   const { targetDir } = getDirs()
-  // todo: read the .brainbuild file to get the secret and projectId
+
+  // read the .brainbuild file to get the secret and projectId
   const brainbuildConfigPath = path.join(targetDir, '.brainbuild')
   if (!fs.existsSync(brainbuildConfigPath)) {
     throw new Error('Missing .brainbuild configuration file')
@@ -87,6 +88,7 @@ export async function handleSync() {
       fs.mkdirSync(pageDir, { recursive: true })
     }
     const filePath = path.join(pageDir, 'page.tsx')
+
     // todo: check if the file already exists and prompt the user to overwrite
 
     fs.writeFileSync(filePath, page.fileText)
@@ -101,6 +103,8 @@ export async function handleSync() {
 
     fs.writeFileSync(filePath, page.content)
   }
+
+  console.log('Synced with BrainBuild')
 }
 
 function getDirs() {

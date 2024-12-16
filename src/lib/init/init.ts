@@ -1,5 +1,6 @@
 import { input } from '@inquirer/prompts'
 import { Command } from 'commander'
+import { chalkTheme } from '../chalkTheme.js'
 import { debugOption } from '../commonOptions.js'
 import createConfigFiles from './createConfigFiles.js'
 
@@ -35,9 +36,8 @@ export async function handleInit() {
   })
 
   await createConfigFiles({ targetDir, secret, projectId })
-  console.log('-------\n')
-  console.log(`🚀 Your new project has been initialized!\n`)
-  console.log('-------\n')
+  console.log(`\n🚀 Your new project has been initialized!\n`)
+  console.log(`Next, run:\n${chalkTheme.code('npx brainbuild sync')} `)
 }
 
 function getDirs() {
@@ -45,10 +45,3 @@ function getDirs() {
 
   return { targetDir }
 }
-
-// fse.copySync(templateDir, targetDir, {
-//   overwrite: false,
-//   errorOnExist: true,
-// })
-
-// console.log(chalkTheme.code(`npm run dev`))
